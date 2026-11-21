@@ -1,0 +1,42 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.20.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        shell: bash
+        run: |
+          if [[ -f pnpm-lock.yaml ]]; then
+            pnpm install --frozen-lockfile
+          else
+            echo 'No pnpm-lock.yaml yet. Commit a generated lockfile for reproducible CI.'
+            pnpm install --no-frozen-lockfile
+          fi
+      - run: pnpm check
+      - name: Confirm site outputs
+        run: |
+          test -s apps/web/dist/index.html
+          test -s apps/web/dist/en/index.html
+          test -s apps/web/dist/es/index.html
+          test -s apps/web/dist/en/gallery/index.html
+          test -s apps/web/dist/es/gallery/index.html
+          test -s apps/web/dist/en/docs/index.html
+          test -s apps/web/dist/es/docs/index.html
+          test -s apps/web/dist/en/components/media-card/index.html
+          test -s apps/web/dist/es/components/media-card/index.html

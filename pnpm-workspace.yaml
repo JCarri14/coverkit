@@ -1,0 +1,5 @@
+packages:
+  - 'apps/web'
+  - 'apps/consumer-test'
+  - 'packages/media-card'
+  - 'packages/animated-media-card'

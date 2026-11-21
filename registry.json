@@ -1,0 +1,105 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "coverkit",
+  "homepage": "https://github.com/JCarri14/coverkit",
+  "items": [
+    {
+      "name": "media-card",
+      "type": "registry:block",
+      "title": "CoverKit Media Card",
+      "description": "Four typed, accessible React cards for manga, books, web novels, comics, and series, with independent count and release metadata.",
+      "files": [
+        {
+          "path": "registry/media-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/media-card.tsx"
+        },
+        {
+          "path": "registry/media-card.types.ts",
+          "type": "registry:ui",
+          "target": "@ui/media-card.types.ts"
+        },
+        {
+          "path": "registry/media-card.css",
+          "type": "registry:file",
+          "target": "@ui/media-card.css"
+        },
+        {
+          "path": "registry/media-card.icons.tsx",
+          "type": "registry:ui",
+          "target": "@ui/media-card.icons.tsx"
+        },
+        {
+          "path": "registry/media-card.language.tsx",
+          "type": "registry:ui",
+          "target": "@ui/media-card.language.tsx"
+        },
+        {
+          "path": "registry/media-card.locales.ts",
+          "type": "registry:ui",
+          "target": "@ui/media-card.locales.ts"
+        },
+        {
+          "path": "registry/media-card.utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/media-card.utils.ts"
+        }
+      ],
+      "dependencies": [
+        "lucide-react"
+      ]
+    },
+    {
+      "name": "animated-media-card",
+      "type": "registry:block",
+      "title": "CoverKit Animated Media Card",
+      "description": "Optional Motion for React wrapper with fade-up, scale-in, view-triggered and staggered card entrances. Includes MediaCard source for standalone installation.",
+      "files": [
+        {
+          "path": "registry/media-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/media-card.tsx"
+        },
+        {
+          "path": "registry/media-card.types.ts",
+          "type": "registry:ui",
+          "target": "@ui/media-card.types.ts"
+        },
+        {
+          "path": "registry/media-card.css",
+          "type": "registry:file",
+          "target": "@ui/media-card.css"
+        },
+        {
+          "path": "registry/media-card.icons.tsx",
+          "type": "registry:ui",
+          "target": "@ui/media-card.icons.tsx"
+        },
+        {
+          "path": "registry/media-card.language.tsx",
+          "type": "registry:ui",
+          "target": "@ui/media-card.language.tsx"
+        },
+        {
+          "path": "registry/media-card.locales.ts",
+          "type": "registry:ui",
+          "target": "@ui/media-card.locales.ts"
+        },
+        {
+          "path": "registry/media-card.utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/media-card.utils.ts"
+        },
+        {
+          "path": "registry/animated-media-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/animated-media-card.tsx"
+        }
+      ],
+      "dependencies": [
+        "lucide-react",
+        "motion"
+      ]
+    }
+  ]
+}

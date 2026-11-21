@@ -1,0 +1,26 @@
+import { readFileSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+const root=resolve(import.meta.dirname,'..');
+const load=p=>readFileSync(join(root,p),'utf8');
+const css=load('packages/media-card/src/media-card.css');
+const app=load('apps/web/src/App.tsx');
+const styles=load('apps/web/src/styles.css');
+const i18n=load('apps/web/src/i18n/index.ts');
+const animated=load('packages/animated-media-card/src/animated-media-card.tsx');
+const routing=load('apps/web/src/routing.ts');
+function check(ok,msg){if(!ok)throw new Error(msg);}
+check(!/\.ck-card button,\.ck-card a\s*\{\s*font\s*:/.test(css),'Global font reset overrides card titles');
+check(/\.ck-title\{[^}]*font-weight:8[0-9]{2}/s.test(css),'Card titles lost their strong weight');
+check(app.includes('className="studio-canvas"')&&app.includes('className="canvas-center"'),'Centered component canvas missing');
+check(app.includes('className="variant-toolbar"')&&styles.includes('.variant-toolbar{position:absolute'),'Fixed variant toolbar missing');
+check(app.includes('setStudyCoverMode')&&app.includes("studyCoverMode === 'artwork' ? sample"),'Mockup / artwork switch missing');
+check(app.includes('className="settings-popover"')&&app.includes('aria-expanded={customizing}'),'Floating settings panel missing');
+check(app.includes('.slice(0,6)')&&styles.includes('grid-auto-flow:column'),'Gallery not limited to six per rail');
+check(styles.includes('.gallery-rail-detailed{grid-auto-columns:390px}')&&styles.includes('.gallery-rail-compact{grid-auto-columns:345px}'),'Gallery cards must have stable widths');
+check(app.includes("theme: 'light' as MediaTheme")&&app.includes('localStorage.setItem'),'Theme default and persistence missing');
+check(app.includes('locale-switch')&&routing.includes('hrefFor')&&routing.includes('parseLocation'),'Localized routing and navigation missing');
+check(i18n.includes('const en =')&&i18n.includes('const es: typeof en'),'Typed bilingual dictionaries missing');
+check(app.includes('className="replay-animation"')&&app.includes('setReplayKey'),'Animation replay action missing');
+check(animated.includes('useReducedMotion')&&animated.includes('useEffect(() => setReady(true)'),'Motion accessibility / visible SSR missing');
+check(css.includes('data-ck-theme="dark"')&&css.includes('--ck-text:#f5f7fc'),'Dark theme contrast tokens missing');
+console.log('Design checks: centered studio, typography, gallery sizing, i18n, Motion and contrast OK');

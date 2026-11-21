@@ -1,0 +1,32 @@
+{
+  "name": "coverkit-monorepo",
+  "private": true,
+  "version": "0.5.0",
+  "type": "module",
+  "packageManager": "pnpm@10.20.0",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "workspace:check": "node scripts/check-workspace.mjs",
+    "dev": "pnpm --filter @coverkit/web dev",
+    "build": "pnpm --filter @coverkit/web build && pnpm --filter @coverkit/consumer-test build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @coverkit/react test && pnpm --filter @coverkit/animated test",
+    "check": "pnpm run workspace:check && pnpm run typecheck && pnpm run test && pnpm run build && pnpm run registry:check && pnpm run design:check && pnpm run seo:check",
+    "registry:sync": "node scripts/sync-registry.mjs",
+    "registry:check": "node scripts/sync-registry.mjs --check && node scripts/check-registry-graph.mjs",
+    "registry:build": "pnpm registry:sync && pnpm dlx shadcn@latest build",
+    "design:check": "node scripts/check-design.mjs",
+    "build:site": "pnpm --filter @coverkit/web build",
+    "seo:check": "node scripts/check-prerender.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCarri14/coverkit.git"
+  },
+  "homepage": "https://jcarri14.github.io/coverkit/en/"
+}
